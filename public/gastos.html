@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pukis - Sistema de Gestion</title>
+    <link rel="icon" href="/assets/square-logo.png">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div class="brand-lockup">
+          <img class="brand-logo" src="/assets/square-logo.png" alt="Zonina, mascota de Pukis">
+          <div>
+            <p class="eyebrow">Sistema de Gestion</p>
+            <h1>Pukis</h1>
+            <span class="brand-mascot">Zonina</span>
+          </div>
+        </div>
+        <nav class="topnav">
+          <a href="/">Inicio</a>
+          <a href="/listas.html">Listas</a>
+          <button id="refreshButton" type="button">Actualizar</button>
+        </nav>
+      </section>
+
+      <p id="botReply" class="reply app-status" aria-live="polite"></p>
+
+      <section id="cycleDashboard" class="cycle-dashboard"></section>
+      <section id="cycleAlerts" class="alerts"></section>
+
+      <section class="grid">
+        <article>
+          <h2>Pagos recientes</h2>
+          <div id="payments" class="list"></div>
+        </article>
+
+        <article>
+          <h2>Ciclos guardados</h2>
+          <div id="monthlyClosures" class="list"></div>
+        </article>
+
+        <article>
+          <h2>Categorias</h2>
+          <form id="categoryForm" class="category-form"></form>
+        </article>
+
+        <article class="wide-card">
+          <h2>Registros</h2>
+          <div class="cycle-jump">
+            <button id="prevCycleButton" class="secondary-button" type="button">Anterior</button>
+            <button id="currentCycleButton" type="button">Actual</button>
+            <button id="nextCycleButton" class="secondary-button" type="button">Siguiente</button>
+          </div>
+          <div class="filters">
+            <label>
+              Ciclo
+              <select id="expenseMonthFilter">
+                <option value="">Todos</option>
+              </select>
+            </label>
+            <label>
+              Persona
+              <select id="expensePersonFilter">
+                <option value="">Todas</option>
+              </select>
+            </label>
+            <label>
+              Categoria
+              <select id="expenseCategoryFilter">
+                <option value="">Todas</option>
+              </select>
+            </label>
+            <label>
+              Buscar
+              <input id="expenseSearchFilter" placeholder="Descripcion o mensaje">
+            </label>
+            <button id="clearExpenseFilters" type="button">Limpiar</button>
+            <button id="monthlyCloseButton" type="button">Cierre de ciclo</button>
+          </div>
+          <div id="monthlyClosePanel" class="close-panel" hidden></div>
+          <div id="expenseSummary" class="summary-strip"></div>
+          <div id="expenses" class="table-wrap"></div>
+        </article>
+
+        <article class="wide-card">
+          <h2>Historial de ciclos</h2>
+          <div id="cycleHistory" class="table-wrap"></div>
+        </article>
+      </section>
+    </main>
+
+    <dialog id="expenseDialog" class="edit-dialog">
+      <form id="expenseEditForm" method="dialog">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Editar gasto</p>
+            <h2>Registro</h2>
+          </div>
+          <button id="closeExpenseDialog" class="ghost-button" type="button">Cerrar</button>
+        </div>
+
+        <div class="edit-grid">
+          <section class="edit-fields">
+            <label>
+              Fecha
+              <input id="expenseDateInput" name="date" type="date" required>
+            </label>
+            <label>
+              Descripcion
+              <input id="expenseDescriptionInput" name="description" required>
+            </label>
+            <label>
+              Monto
+              <input id="expenseAmountInput" name="amount" type="number" min="0.01" step="0.01" required>
+            </label>
+            <label>
+              Categoria
+              <input id="expenseCategoryInput" name="category">
+            </label>
+            <label>
+              Pago
+              <select id="expensePayerInput" name="payer"></select>
+            </label>
+            <div class="field-group">
+              <span>Participantes</span>
+              <div id="expenseParticipantsInput" class="check-grid"></div>
+            </div>
+          </section>
+
+          <aside class="original-message">
+            <span>Mensaje original</span>
+            <p id="expenseOriginalText">Sin mensaje original registrado.</p>
+          </aside>
+        </div>
+
+        <div class="dialog-actions">
+          <button id="cancelExpenseEdit" class="secondary-button" type="button">Cancelar</button>
+          <button type="submit">Guardar cambios</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="closureDialog" class="edit-dialog detail-dialog">
+      <div class="dialog-panel">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Cierre guardado</p>
+            <h2 id="closureDialogTitle">Detalle</h2>
+          </div>
+          <button id="closeClosureDialog" class="ghost-button" type="button">Cerrar</button>
+        </div>
+
+        <div id="closureDialogBody" class="detail-body"></div>
+      </div>
+    </dialog>
+
+    <dialog id="paymentsDialog" class="edit-dialog detail-dialog">
+      <div class="dialog-panel">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Historial</p>
+            <h2>Todos los pagos</h2>
+          </div>
+          <button id="closePaymentsDialog" class="ghost-button" type="button">Cerrar</button>
+        </div>
+
+        <div id="paymentsDialogBody" class="detail-body"></div>
+      </div>
+    </dialog>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

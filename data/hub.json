@@ -1,0 +1,241 @@
+{
+  "meta": {
+    "version": 1,
+    "createdAt": "2026-05-07T21:10:00.000Z",
+    "updatedAt": "2026-05-08T13:10:12.425Z"
+  },
+  "people": [
+    {
+      "id": "rodrigo",
+      "name": "Rodrigo",
+      "kind": "home",
+      "aliases": [
+        "yo",
+        "me",
+        "mi",
+        "rodrigo"
+      ]
+    },
+    {
+      "id": "jess",
+      "name": "Jess",
+      "kind": "home",
+      "aliases": [
+        "jess",
+        "vale",
+        "novia"
+      ]
+    },
+    {
+      "id": "mama",
+      "name": "Mama",
+      "kind": "external",
+      "aliases": [
+        "Mama"
+      ]
+    },
+    {
+      "id": "papa",
+      "name": "Papa",
+      "kind": "external",
+      "aliases": [
+        "Papa"
+      ]
+    },
+    {
+      "id": "ana",
+      "name": "Ana",
+      "kind": "external",
+      "aliases": [
+        "Ana"
+      ]
+    },
+    {
+      "id": "carla",
+      "name": "Carla",
+      "kind": "external",
+      "aliases": [
+        "Carla"
+      ]
+    }
+  ],
+  "expenses": [],
+  "payments": [],
+  "shoppingItems": [],
+  "tasks": [],
+  "monthlyClosures": [],
+  "categories": [
+    {
+      "id": "general",
+      "name": "General",
+      "color": "#606979"
+    },
+    {
+      "id": "comida",
+      "name": "Comida",
+      "color": "#d38c49"
+    },
+    {
+      "id": "delivery",
+      "name": "Delivery",
+      "color": "#d9a29a"
+    },
+    {
+      "id": "casa",
+      "name": "Casa",
+      "color": "#909a84"
+    },
+    {
+      "id": "transporte",
+      "name": "Transporte",
+      "color": "#958c9e"
+    },
+    {
+      "id": "salud",
+      "name": "Salud",
+      "color": "#887d7f"
+    }
+  ],
+  "lists": [
+    {
+      "id": "list_mowxcz1m_d06tzz",
+      "name": "Compras",
+      "aliases": [
+        "Compras",
+        "compras",
+        "super",
+        "mercado",
+        "lista de compras"
+      ],
+      "category": "compras",
+      "startDate": "2026-05-08",
+      "dueDate": "",
+      "status": "open",
+      "notes": "Lista permanente para compras de casa.",
+      "items": [],
+      "createdAt": "2026-05-08T13:02:16.426Z",
+      "updatedAt": "2026-05-08T13:02:16.426Z",
+      "deletedAt": null
+    },
+    {
+      "id": "list_mowxeghk_1wmiqb",
+      "name": "Series",
+      "aliases": [
+        "Series",
+        "series",
+        "shows",
+        "temporadas",
+        "para ver series"
+      ],
+      "category": "series",
+      "startDate": "2026-05-08",
+      "dueDate": "",
+      "status": "open",
+      "notes": "Lista permanente para series por ver y calificadas.",
+      "items": [
+        {
+          "id": "li_mowxmmse_lzlqoc",
+          "title": "Breaking Bad",
+          "priority": "normal",
+          "rating": 5,
+          "platform": "Netflix",
+          "recommendedBy": "Demo",
+          "mediaStatus": "pendiente",
+          "tmdbId": 1396,
+          "tmdbType": "tv",
+          "originalTitle": "Breaking Bad",
+          "year": "2008",
+          "director": "",
+          "creator": "Vince Gilligan",
+          "productionCompanies": [
+            "Sony Pictures Television",
+            "High Bridge Productions",
+            "Gran Via Productions"
+          ],
+          "overview": "Un profesor de química con cáncer terminal se asocia con un exalumno suyo para fabricar y vender metanfetamina a fin de que su familia no pase apuros económicos.",
+          "posterPath": "https://image.tmdb.org/t/p/w342/ztkUQFLlC19CCMYHW9o1zWhJRNq.jpg",
+          "tmdbUrl": "https://www.themoviedb.org/tv/1396",
+          "order": 0,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T13:09:47.102Z",
+          "updatedAt": "2026-05-08T13:10:12.425Z"
+        }
+      ],
+      "createdAt": "2026-05-08T13:03:25.688Z",
+      "updatedAt": "2026-05-08T13:10:12.425Z",
+      "deletedAt": null
+    },
+    {
+      "id": "list_mowxeghq_lx9f1k",
+      "name": "Peliculas",
+      "aliases": [
+        "Peliculas",
+        "peliculas",
+        "pelis",
+        "cine",
+        "para ver"
+      ],
+      "category": "peliculas",
+      "startDate": "2026-05-08",
+      "dueDate": "",
+      "status": "open",
+      "notes": "Lista permanente para peliculas por ver y calificadas.",
+      "items": [
+        {
+          "id": "li_mowxlpd3_ssg1jo",
+          "title": "Arrival",
+          "priority": "normal",
+          "rating": 4.5,
+          "platform": "Netflix",
+          "recommendedBy": "Demo",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 0,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T13:09:03.783Z",
+          "updatedAt": "2026-05-08T13:09:03.783Z"
+        },
+        {
+          "id": "li_mowxmhq8_0f81f0",
+          "title": "Dune",
+          "priority": "normal",
+          "rating": 4.5,
+          "platform": "Max",
+          "recommendedBy": "Demo",
+          "mediaStatus": "pendiente",
+          "tmdbId": 438631,
+          "tmdbType": "movie",
+          "originalTitle": "Dune",
+          "year": "2021",
+          "director": "Denis Villeneuve",
+          "creator": "",
+          "productionCompanies": [
+            "Legendary Pictures"
+          ],
+          "overview": "En un lejano futuro, la galaxia conocida es gobernada mediante un sistema feudal de casas nobles bajo el mandato del Emperador. Las alianzas y la política giran entorno a un pequeño planeta, Dune,  del que extrae la 'especia melange', la materia prima que permite los viajes espaciales. La Casa Atreides, bajo el mandato del Duque Leto Atreides recibe el encargo de custodiar el planeta, relevando en la encomienda a sus históricos enemigos, los Harkonnen. Paul Atreides, hijo del duque, se verá atrapado en las intrigas políticas mientras descubre el destino que le deparan los desiertos de Dune.",
+          "posterPath": "https://image.tmdb.org/t/p/w342/szcew6yyjcDvaL0isaPBk2e3nkF.jpg",
+          "tmdbUrl": "https://www.themoviedb.org/movie/438631",
+          "order": 1,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T13:09:40.544Z",
+          "updatedAt": "2026-05-08T13:09:40.544Z"
+        }
+      ],
+      "createdAt": "2026-05-08T13:03:25.694Z",
+      "updatedAt": "2026-05-08T13:09:40.544Z",
+      "deletedAt": null
+    }
+  ]
+}

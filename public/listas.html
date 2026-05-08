@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pukis - Listas</title>
+    <link rel="icon" href="/assets/square-logo.png">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="topbar">
+        <div class="brand-lockup">
+          <img class="brand-logo" src="/assets/square-logo.png" alt="Zonina, mascota de Pukis">
+          <div>
+            <p class="eyebrow">Sistema de Gestion</p>
+            <h1>Listas</h1>
+            <span class="brand-mascot">Zonina</span>
+          </div>
+        </div>
+        <nav class="topnav">
+          <a href="/">Inicio</a>
+          <a href="/gastos.html">Gastos</a>
+          <button id="refreshButton" type="button">Actualizar</button>
+        </nav>
+      </section>
+
+      <p id="listReply" class="reply app-status" aria-live="polite"></p>
+
+      <section class="grid">
+        <article>
+          <h2>Nueva lista</h2>
+          <form id="listForm" class="list-form">
+            <label>
+              Nombre
+              <input id="listNameInput" required placeholder="Viaje, Casa, Wishlist">
+            </label>
+            <label>
+              Categoria
+              <select id="listCategoryInput">
+                <option value="general">General</option>
+                <option value="viaje">Viaje</option>
+                <option value="casa">Casa</option>
+                <option value="wishlist">Wishlist</option>
+                <option value="tramites">Tramites</option>
+                <option value="compras">Compras</option>
+                <option value="salud">Salud</option>
+                <option value="trabajo">Trabajo</option>
+                <option value="peliculas">Peliculas</option>
+                <option value="series">Series</option>
+              </select>
+            </label>
+            <label>
+              Alias para WhatsApp
+              <input id="listAliasesInput" placeholder="viaje, cusco, docs">
+            </label>
+            <label>
+              Fecha de inicio
+              <input id="listStartInput" type="date">
+            </label>
+            <label>
+              Fecha limite
+              <input id="listDueInput" type="date">
+            </label>
+            <label>
+              Notas
+              <textarea id="listNotesInput" rows="3" placeholder="Contexto o detalle"></textarea>
+            </label>
+            <button type="submit">Crear lista</button>
+          </form>
+        </article>
+
+        <article>
+          <h2>Resumen</h2>
+          <div id="listsSummary" class="summary-strip"></div>
+          <div class="template-actions" aria-label="Plantillas">
+            <button type="button" data-template="viaje">Viaje</button>
+            <button type="button" data-template="mudanza">Mudanza</button>
+            <button type="button" data-template="botiquin">Botiquin</button>
+            <button type="button" data-template="tramites">Tramites</button>
+          </div>
+        </article>
+
+        <article>
+          <h2>Buscar</h2>
+          <div class="list-form">
+            <label>
+              Busqueda global
+              <input id="globalSearchInput" placeholder="Gasto, lista, cierre, pelicula">
+            </label>
+            <div id="globalSearchResults" class="search-results"></div>
+          </div>
+        </article>
+
+        <article class="wide-card">
+          <div class="section-title-row">
+            <h2>Listas activas</h2>
+            <div class="list-filters">
+              <select id="listFilterInput" aria-label="Filtro de listas">
+                <option value="all">Todas</option>
+                <option value="pending">Pendientes</option>
+                <option value="done">Terminadas</option>
+                <option value="top-rated">Mejor puntuadas</option>
+                <option value="peliculas">Peliculas</option>
+                <option value="series">Series</option>
+              </select>
+              <select id="listSortInput" aria-label="Orden de listas">
+                <option value="recent">Recientes</option>
+                <option value="rating">Rating</option>
+                <option value="name">Nombre</option>
+              </select>
+            </div>
+          </div>
+          <div id="listsBoard" class="lists-board"></div>
+        </article>
+
+        <article class="wide-card">
+          <h2>Papelera</h2>
+          <div id="deletedListsBoard" class="lists-board compact-lists-board"></div>
+        </article>
+      </section>
+    </main>
+
+    <script src="/listas.js" type="module"></script>
+  </body>
+</html>
