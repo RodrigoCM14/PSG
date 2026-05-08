@@ -11,9 +11,16 @@ services:
       - key: DATA_FILE
         value: /opt/render/project/src/data/hub.json
       - key: TMDB_READ_TOKEN
+        value: eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2M2M4NzAyMmJmZWQ1M2NjODc4MWQyODhlMGZkNzlhNyIsIm5iZiI6MTc3MTk4MzYzMC44ODIsInN1YiI6IjY5OWU1MzBlMjU3NDhhNzMyMmYxZmMxYyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.i87zPhKewTcTg7cRHwv5y4As5SeD8uKyqS8zQZnr5-M
         sync: false
       - key: TMDB_API_KEY
+        value: 63c87022bfed53cc8781d288e0fd79a7
         sync: false
+      - key: OPENAI_API_KEY
+        value: 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
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-5.4-mini
       - key: WHATSAPP_VERIFY_TOKEN
         sync: false
       - key: WHATSAPP_ACCESS_TOKEN

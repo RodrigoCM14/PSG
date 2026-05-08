@@ -2,7 +2,7 @@
   "meta": {
     "version": 1,
     "createdAt": "2026-05-07T21:10:00.000Z",
-    "updatedAt": "2026-05-08T14:21:25.897Z"
+    "updatedAt": "2026-05-08T21:15:11.583Z"
   },
   "people": [
     {
@@ -59,11 +59,55 @@
       ]
     }
   ],
-  "expenses": [],
+  "expenses": [
+    {
+      "id": "exp_moxeyvdu_n7t6nj",
+      "description": "pan Wong",
+      "amount": 8.5,
+      "currency": "PEN",
+      "date": "2026-05-08T21:15:11.583Z",
+      "category": "comida",
+      "payerId": "rodrigo",
+      "participantIds": [
+        "rodrigo",
+        "jess"
+      ],
+      "shares": {
+        "rodrigo": 4.25,
+        "jess": 4.25
+      },
+      "source": "whatsapp",
+      "notes": "",
+      "originalText": "Compre pan en Wong costo 8.50",
+      "createdAt": "2026-05-08T21:15:11.583Z",
+      "updatedAt": "2026-05-08T21:15:11.583Z",
+      "voidedAt": null
+    }
+  ],
   "payments": [],
   "shoppingItems": [],
   "tasks": [],
-  "monthlyClosures": [],
+  "monthlyClosures": [
+    {
+      "id": "close_moxa4ur0_cmtais",
+      "month": "2026-05",
+      "total": 0,
+      "expenseCount": 0,
+      "categories": [],
+      "payers": [],
+      "responsibilities": [],
+      "balances": [],
+      "cycleStart": "2026-04-11",
+      "cycleEnd": "2026-05-10",
+      "dueDate": "2026-06-03",
+      "cardPaidAt": null,
+      "status": "pending",
+      "reopenedAt": null,
+      "notes": "",
+      "createdAt": "2026-05-08T18:59:52.620Z",
+      "updatedAt": "2026-05-08T18:59:52.620Z"
+    }
+  ],
   "categories": [
     {
       "id": "general",
@@ -254,7 +298,170 @@
       "notes": "Lista permanente para anime por ver y calificado.",
       "items": [],
       "createdAt": "2026-05-08T14:21:25.897Z",
-      "updatedAt": "2026-05-08T14:21:25.897Z"
+      "updatedAt": "2026-05-08T14:21:25.897Z",
+      "deletedAt": null
+    },
+    {
+      "id": "list_moxa6yeq_nvt9cy",
+      "name": "Viaje",
+      "aliases": [
+        "Viaje",
+        "viaje"
+      ],
+      "category": "viaje",
+      "startDate": "2026-05-08",
+      "dueDate": "",
+      "status": "open",
+      "notes": "Creada desde plantilla",
+      "items": [
+        {
+          "id": "li_moxa6yeq_560uhc",
+          "title": "Pasaporte",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 0,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T19:01:30.674Z",
+          "updatedAt": "2026-05-08T19:01:30.674Z"
+        },
+        {
+          "id": "li_moxa6yeq_92bqcy",
+          "title": "DNI",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 1,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T19:01:30.674Z",
+          "updatedAt": "2026-05-08T19:01:30.674Z"
+        },
+        {
+          "id": "li_moxa6yeq_awej0p",
+          "title": "Cargadores",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 2,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T19:01:30.674Z",
+          "updatedAt": "2026-05-08T19:01:30.674Z"
+        },
+        {
+          "id": "li_moxa6yeq_3j25xz",
+          "title": "Bloqueador",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 3,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T19:01:30.674Z",
+          "updatedAt": "2026-05-08T19:01:30.674Z"
+        },
+        {
+          "id": "li_moxa6yeq_dr3kji",
+          "title": "Reservas",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 4,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T19:01:30.674Z",
+          "updatedAt": "2026-05-08T19:01:30.674Z"
+        },
+        {
+          "id": "li_moxa6yeq_zgl7j3",
+          "title": "Medicinas",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": null,
+          "tmdbType": "",
+          "originalTitle": "",
+          "year": "",
+          "director": "",
+          "creator": "",
+          "productionCompanies": [],
+          "overview": "",
+          "posterPath": "",
+          "tmdbUrl": "",
+          "order": 5,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-08T19:01:30.674Z",
+          "updatedAt": "2026-05-08T19:01:30.674Z"
+        }
+      ],
+      "createdAt": "2026-05-08T19:01:30.674Z",
+      "updatedAt": "2026-05-08T19:01:38.735Z",
+      "deletedAt": "2026-05-08T19:01:38.735Z"
     }
   ]
 }

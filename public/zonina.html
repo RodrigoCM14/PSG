@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pukis - Zonina</title>
+    <link rel="icon" href="/assets/square-logo.png?v=20260508">
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="chat-shell">
+      <section class="chat-panel" aria-label="Chat con Zonina">
+        <header class="chat-head">
+          <a class="ghost-button" href="/">Inicio</a>
+          <div class="chat-contact">
+            <img src="/assets/square-logo.png?v=20260508" alt="Zonina">
+            <div>
+              <h1>Zonina</h1>
+              <p>Hub de casa</p>
+            </div>
+          </div>
+          <a class="ghost-button" href="/listas.html">Listas</a>
+        </header>
+
+        <div id="chatMessages" class="chat-messages" aria-live="polite"></div>
+
+        <div class="quick-prompts" aria-label="Mensajes rapidos">
+          <button type="button" data-prompt="lista Compras">Compras</button>
+          <button type="button" data-prompt="lista Peliculas">Peliculas</button>
+          <button type="button" data-prompt="resumen semanal de listas">Resumen listas</button>
+          <button type="button" data-prompt="cuanto debo">Balance</button>
+        </div>
+
+        <form id="chatForm" class="chat-form">
+          <input id="chatInput" autocomplete="off" placeholder="Escribe como en WhatsApp" required>
+          <button type="submit">Enviar</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="/zonina.js" type="module"></script>
+  </body>
+</html>

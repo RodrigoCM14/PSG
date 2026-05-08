@@ -23,7 +23,7 @@
 body {
   margin: 0;
   background-color: var(--page);
-  background-image: url("/assets/doodle-pattern.png");
+  background-image: url("/assets/doodle-pattern.png?v=20260508");
   background-size: 144px 144px;
   background-position: 10px 14px;
   background-repeat: repeat;
@@ -73,6 +73,122 @@ body {
   background: var(--accent);
   color: white;
   border-color: var(--accent-dark);
+}
+
+.chat-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+}
+
+.chat-panel {
+  width: min(760px, 100%);
+  height: min(820px, calc(100vh - 40px));
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: rgba(255, 253, 251, 0.92);
+  box-shadow: 0 20px 44px rgba(96, 105, 121, 0.16);
+  overflow: hidden;
+}
+
+.chat-head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid rgba(96, 105, 121, 0.16);
+  padding: 14px;
+}
+
+.chat-contact {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.chat-contact img {
+  width: 52px;
+  height: 52px;
+  border-radius: 14px;
+}
+
+.chat-contact h1,
+.chat-contact p {
+  margin: 0;
+}
+
+.chat-contact h1 {
+  font-size: 22px;
+}
+
+.chat-contact p {
+  color: var(--muted);
+  font-weight: 800;
+}
+
+.chat-messages {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: 18px;
+  overflow-y: auto;
+}
+
+.chat-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+}
+
+.chat-row img {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+}
+
+.chat-row-user {
+  justify-content: flex-end;
+}
+
+.chat-bubble {
+  max-width: min(560px, 82%);
+  border-radius: 8px;
+  background: #f0e7dc;
+  color: var(--ink);
+  padding: 11px 13px;
+  line-height: 1.4;
+  white-space: pre-wrap;
+}
+
+.chat-row-user .chat-bubble {
+  background: var(--accent);
+  color: white;
+}
+
+.quick-prompts {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  border-top: 1px solid rgba(96, 105, 121, 0.12);
+  padding: 10px 14px;
+}
+
+.quick-prompts button {
+  flex: 0 0 auto;
+  background: rgba(96, 105, 121, 0.12);
+  color: var(--ink);
+}
+
+.chat-form {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  border-top: 1px solid rgba(96, 105, 121, 0.16);
+  padding: 14px;
 }
 
 button,

@@ -16,6 +16,7 @@ import {
 } from "../src/domain.js";
 import { handleNaturalMessage } from "../src/parser.js";
 import { mergeMediaMetadata } from "../src/tmdb.js";
+import { handleZoninaAgentMessage } from "../src/zonina-agent.js";
 
 const tests = [
   {
@@ -472,11 +473,32 @@ const tests = [
       assert.deepEqual(merged.productionCompanies, ["FilmNation Entertainment"]);
       assert.equal(merged.tmdbType, "movie");
     }
+  },
+  {
+    name: "zonina chat falls back to local parser without OpenAI key",
+    async run() {
+      const originalKey = process.env.OPENAI_API_KEY;
+      delete process.env.OPENAI_API_KEY;
+      try {
+        const state = createInitialState();
+        createList(state, { name: "Compras", category: "compras" });
+        const result = await handleZoninaAgentMessage(state, {
+          from: "Rodrigo",
+          text: "agrega leche y pan a lista Compras"
+        });
+        assert.equal(result.mode, "parser");
+        assert.equal(result.intent, "list");
+        assert.equal(state.lists[0].name, "Compras");
+        assert.deepEqual(state.lists[0].items.map((item) => item.title), ["Leche", "Pan"]);
+      } finally {
+        if (originalKey) process.env.OPENAI_API_KEY = originalKey;
+      }
+    }
   }
 ];
 
 for (const item of tests) {
-  item.run();
+  await item.run();
   console.log(`ok - ${item.name}`);
 }
 

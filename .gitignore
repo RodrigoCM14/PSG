@@ -1,2 +1,4 @@
 data/tmdb.local.json
+.env
+.env.local
 *.log

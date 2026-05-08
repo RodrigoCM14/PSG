@@ -30,9 +30,13 @@ import {
 import { handleNaturalMessage } from "./src/parser.js";
 import { loadState, saveState } from "./src/store.js";
 import { enrichMediaInput, loadTmdbConfig } from "./src/tmdb.js";
+import { handleZoninaAgentMessage } from "./src/zonina-agent.js";
+import { loadLocalEnv } from "./src/env.js";
+
+const ROOT = resolve(".");
+await loadLocalEnv(ROOT);
 
 const PORT = Number(process.argv[2] || process.env.PORT || 3000);
-const ROOT = resolve(".");
 const DATA_FILE = process.env.DATA_FILE || join(ROOT, "data", "hub.json");
 const PUBLIC_DIR = join(ROOT, "public");
 
@@ -63,7 +67,7 @@ async function handleApi(req, res, url) {
     sendJson(res, 200, {
       name: "Pukis Hub",
       version: "0.1.0",
-      modules: ["expenses", "billing-cycles", "lists", "categories", "exports", "whatsapp-ready", "discord-preview"]
+      modules: ["expenses", "billing-cycles", "lists", "categories", "exports", "zonina-agent", "whatsapp-ready", "discord-preview"]
     });
     return;
   }
@@ -287,6 +291,14 @@ async function handleApi(req, res, url) {
     }
     await persist();
     sendJson(res, 200, { ...result, state: buildViewState() });
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/api/zonina/chat") {
+    const body = await readJson(req);
+    const result = await handleZoninaAgentMessage(state, body, { enrichNaturalMessageMediaResult });
+    await persist();
+    sendJson(res, 200, body.includeState ? { ...result, state: buildViewState() } : result);
     return;
   }
 
