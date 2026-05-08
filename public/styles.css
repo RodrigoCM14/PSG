@@ -524,6 +524,7 @@ article {
   border-radius: 8px;
   background: var(--surface);
   padding: 14px;
+  min-width: 0;
 }
 
 .list-card-head {
@@ -586,10 +587,13 @@ article {
   border-radius: 6px;
   padding: 8px 10px;
   background: rgba(245, 226, 204, 0.24);
+  min-width: 0;
 }
 
 .todo-item span {
   flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
 
 .todo-item span em {
@@ -623,7 +627,14 @@ article {
 }
 
 .media-todo-item {
+  display: grid;
+  grid-template-columns: auto auto minmax(0, 1fr) minmax(120px, auto) auto;
   background: rgba(255, 255, 255, 0.58);
+}
+
+.media-todo-item .media-chip,
+.media-todo-item .media-status-select {
+  grid-column: 3 / span 1;
 }
 
 .media-poster {
@@ -635,14 +646,16 @@ article {
 }
 
 .star-rating {
-  min-width: 92px;
+  min-width: 76px;
   color: #9a6b24;
   font-weight: 900;
-  letter-spacing: 1px;
+  letter-spacing: 0;
+  text-align: right;
 }
 
 .rating-select {
-  min-width: 116px;
+  width: 112px;
+  min-width: 0;
 }
 
 .media-chip {
@@ -653,10 +666,14 @@ article {
   font-size: 11px;
   font-weight: 900;
   white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .media-status-select {
-  min-width: 112px;
+  width: 112px;
+  min-width: 0;
 }
 
 .priority-pill {
@@ -698,7 +715,12 @@ article {
 }
 
 .media-add-item-form {
-  grid-template-columns: 1fr 132px 120px 140px 120px auto;
+  grid-template-columns: minmax(0, 1fr) 132px 120px;
+  align-items: stretch;
+}
+
+.media-add-item-form button {
+  grid-column: 3;
 }
 
 .save-template-button {
@@ -1221,6 +1243,28 @@ button:disabled {
   .media-add-item-form,
   .compact-lists-board {
     grid-template-columns: 1fr;
+  }
+
+  .media-todo-item {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .media-todo-item .media-poster,
+  .media-todo-item input[type="checkbox"] {
+    grid-row: span 2;
+  }
+
+  .media-todo-item .star-rating,
+  .media-todo-item .rating-select,
+  .media-todo-item .media-chip,
+  .media-todo-item .media-status-select {
+    grid-column: 2 / -1;
+    width: 100%;
+    max-width: none;
+  }
+
+  .media-add-item-form button {
+    grid-column: auto;
   }
 
   .section-title-row,

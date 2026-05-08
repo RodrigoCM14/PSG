@@ -67,6 +67,7 @@ function mediaTypeForCategory(category) {
   const normalized = String(category || "").toLowerCase();
   if (normalized === "peliculas") return "movie";
   if (normalized === "series") return "tv";
+  if (normalized === "anime") return "tv";
   return "";
 }
 

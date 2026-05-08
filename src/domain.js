@@ -7,7 +7,7 @@ export const DEFAULT_CATEGORIES = [
   { id: "transporte", name: "Transporte", color: "#958c9e" },
   { id: "salud", name: "Salud", color: "#887d7f" }
 ];
-export const DEFAULT_LIST_CATEGORIES = ["general", "viaje", "casa", "wishlist", "tramites", "compras", "salud", "trabajo", "peliculas", "series"];
+export const DEFAULT_LIST_CATEGORIES = ["general", "viaje", "casa", "wishlist", "tramites", "compras", "salud", "trabajo", "peliculas", "series", "anime"];
 export const LIST_TEMPLATES = {
   viaje: ["Pasaporte", "DNI", "Cargadores", "Bloqueador", "Reservas", "Medicinas"],
   mudanza: ["Cajas", "Cinta", "Cambiar direccion", "Coordinar transporte", "Separar documentos"],
@@ -633,7 +633,7 @@ function normalizeMediaStatus(value) {
 }
 
 function isMediaCategory(value) {
-  return ["peliculas", "series"].includes(slugify(value || ""));
+  return ["peliculas", "series", "anime"].includes(slugify(value || ""));
 }
 
 function titleFromSlug(value) {

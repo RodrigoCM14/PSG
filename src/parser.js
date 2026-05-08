@@ -429,6 +429,7 @@ function inferListCategory(value) {
   const key = slugify(value);
   if (/(pelicula|peliculas|cine|movie|movies)/.test(key)) return "peliculas";
   if (/(serie|series|temporada)/.test(key)) return "series";
+  if (/(anime|manga)/.test(key)) return "anime";
   if (/(viaje|playa|hotel|pasaporte)/.test(key)) return "viaje";
   if (/(casa|mudanza|hogar)/.test(key)) return "casa";
   if (/(compra|super|mercado)/.test(key)) return "compras";
@@ -438,7 +439,7 @@ function inferListCategory(value) {
 }
 
 function isMediaList(list) {
-  return ["peliculas", "series"].includes(slugify(list?.category || ""));
+  return ["peliculas", "series", "anime"].includes(slugify(list?.category || ""));
 }
 
 function parseMediaItem(value) {

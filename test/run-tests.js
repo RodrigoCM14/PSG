@@ -332,6 +332,17 @@ const tests = [
     }
   },
   {
+    name: "anime lists behave like media lists",
+    run() {
+      const state = createInitialState();
+      const list = createList(state, { name: "Anime", category: "anime" });
+      const item = addListItem(state, list.id, { title: "Frieren", rating: 5, mediaStatus: "vista" });
+      updateListItem(state, list.id, item.id, { mediaStatus: "vista" });
+      assert.equal(state.lists[0].items[0].rating, 5);
+      assert.equal(state.lists[0].items[0].done, true);
+    }
+  },
+  {
     name: "lists can be saved as custom templates",
     run() {
       const state = createInitialState();

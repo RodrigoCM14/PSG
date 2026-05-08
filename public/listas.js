@@ -320,7 +320,7 @@ function applyListView(source) {
   if (filter === "pending") output = output.filter((list) => sortedItems(list).some((item) => !item.done));
   if (filter === "done") output = output.filter((list) => list.status === "done");
   if (filter === "top-rated") output = output.filter(isMediaList);
-  if (filter === "peliculas" || filter === "series") output = output.filter((list) => normalize(list.category) === filter);
+  if (filter === "peliculas" || filter === "series" || filter === "anime") output = output.filter((list) => normalize(list.category) === filter);
   if (sort === "rating" || filter === "top-rated") output.sort((a, b) => averageRating(b) - averageRating(a));
   else if (sort === "name") output.sort((a, b) => a.name.localeCompare(b.name));
   else output.sort((a, b) => new Date(b.updatedAt || b.createdAt).getTime() - new Date(a.updatedAt || a.createdAt).getTime());
@@ -341,7 +341,7 @@ function averageRating(list) {
 }
 
 function isMediaList(list) {
-  return ["peliculas", "series"].includes(normalize(list?.category || ""));
+  return ["peliculas", "series", "anime"].includes(normalize(list?.category || ""));
 }
 
 function renderMediaControls(item, disabled) {

@@ -2,7 +2,7 @@
   "meta": {
     "version": 1,
     "createdAt": "2026-05-07T21:10:00.000Z",
-    "updatedAt": "2026-05-08T13:10:12.425Z"
+    "updatedAt": "2026-05-08T14:21:25.897Z"
   },
   "people": [
     {
@@ -236,6 +236,25 @@
       "createdAt": "2026-05-08T13:03:25.694Z",
       "updatedAt": "2026-05-08T13:09:40.544Z",
       "deletedAt": null
+    },
+    {
+      "id": "list_mox06rrd_apw4mv",
+      "name": "Anime",
+      "aliases": [
+        "Anime",
+        "anime",
+        "animes",
+        "manga",
+        "para ver anime"
+      ],
+      "category": "anime",
+      "startDate": "2026-05-08",
+      "dueDate": "",
+      "status": "open",
+      "notes": "Lista permanente para anime por ver y calificado.",
+      "items": [],
+      "createdAt": "2026-05-08T14:21:25.897Z",
+      "updatedAt": "2026-05-08T14:21:25.897Z"
     }
   ]
 }

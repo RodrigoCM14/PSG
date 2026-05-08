@@ -23,6 +23,12 @@ Luego abrir `http://localhost:3000`.
 
 Render asigna `PORT` automáticamente y el servidor escucha en `0.0.0.0`.
 
+Si Render intenta desplegarlo como Docker, el repo incluye un `Dockerfile`. En ese caso usa:
+
+- Environment: `Docker`
+- Dockerfile path: `./Dockerfile`
+- Variables privadas: las mismas listadas arriba
+
 ## API principal
 
 - `GET /api/info`
