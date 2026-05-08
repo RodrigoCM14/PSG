@@ -77,6 +77,7 @@
               <input id="expenseSearchFilter" placeholder="Descripcion o mensaje">
             </label>
             <button id="clearExpenseFilters" type="button">Limpiar</button>
+            <button id="cycleSummaryButton" type="button">Resumen de ciclo</button>
             <button id="monthlyCloseButton" type="button">Cierre de ciclo</button>
           </div>
           <div id="monthlyClosePanel" class="close-panel" hidden></div>
@@ -167,6 +168,20 @@
         </div>
 
         <div id="paymentsDialogBody" class="detail-body"></div>
+      </div>
+    </dialog>
+
+    <dialog id="cycleSummaryDialog" class="edit-dialog detail-dialog">
+      <div class="dialog-panel">
+        <div class="dialog-head">
+          <div>
+            <p class="eyebrow">Resumen de ciclo</p>
+            <h2 id="cycleSummaryTitle">Categorias</h2>
+          </div>
+          <button id="closeCycleSummaryDialog" class="ghost-button" type="button">Cerrar</button>
+        </div>
+
+        <div id="cycleSummaryDialogBody" class="detail-body"></div>
       </div>
     </dialog>
 

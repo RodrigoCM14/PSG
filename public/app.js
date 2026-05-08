@@ -16,6 +16,7 @@
   expenseCategoryFilter: document.querySelector("#expenseCategoryFilter"),
   expenseSearchFilter: document.querySelector("#expenseSearchFilter"),
   clearExpenseFilters: document.querySelector("#clearExpenseFilters"),
+  cycleSummaryButton: document.querySelector("#cycleSummaryButton"),
   monthlyCloseButton: document.querySelector("#monthlyCloseButton"),
   monthlyClosePanel: document.querySelector("#monthlyClosePanel"),
   expenseSummary: document.querySelector("#expenseSummary"),
@@ -27,6 +28,10 @@
   closeClosureDialog: document.querySelector("#closeClosureDialog"),
   closureDialogTitle: document.querySelector("#closureDialogTitle"),
   closureDialogBody: document.querySelector("#closureDialogBody"),
+  cycleSummaryDialog: document.querySelector("#cycleSummaryDialog"),
+  closeCycleSummaryDialog: document.querySelector("#closeCycleSummaryDialog"),
+  cycleSummaryTitle: document.querySelector("#cycleSummaryTitle"),
+  cycleSummaryDialogBody: document.querySelector("#cycleSummaryDialogBody"),
   paymentsDialog: document.querySelector("#paymentsDialog"),
   closePaymentsDialog: document.querySelector("#closePaymentsDialog"),
   paymentsDialogBody: document.querySelector("#paymentsDialogBody"),
@@ -76,6 +81,7 @@ els.monthlyCloseButton.addEventListener("click", () => {
   }
   renderMonthlyClose(month);
 });
+els.cycleSummaryButton.addEventListener("click", openCycleSummary);
 els.prevCycleButton.addEventListener("click", () => shiftSelectedCycle(-1));
 els.currentCycleButton.addEventListener("click", () => selectCycle(billingCycleKeyForDate(new Date().toISOString())));
 els.nextCycleButton.addEventListener("click", () => shiftSelectedCycle(1));
@@ -84,6 +90,7 @@ els.categoryForm.addEventListener("submit", saveCategories);
 els.closeExpenseDialog.addEventListener("click", closeExpenseEditor);
 els.cancelExpenseEdit.addEventListener("click", closeExpenseEditor);
 els.closeClosureDialog.addEventListener("click", closeClosureDetail);
+els.closeCycleSummaryDialog.addEventListener("click", closeCycleSummary);
 els.closePaymentsDialog.addEventListener("click", closePaymentsHistory);
 els.expenseEditForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -392,6 +399,61 @@ function openPaymentsHistory() {
 
 function closePaymentsHistory() {
   els.paymentsDialog.close();
+}
+
+function openCycleSummary() {
+  const month = els.expenseMonthFilter.value || billingCycleKeyForDate(new Date().toISOString());
+  const expenses = latestExpenses.filter((expense) => billingCycleKeyForDate(expense.date) === month);
+  const categories = groupTotals(expenses, (item) => item.category || "general");
+  const total = categories.reduce((sum, item) => sum + Number(item.amount || 0), 0);
+
+  els.cycleSummaryTitle.textContent = formatCycleLabel(month);
+  if (!categories.length) {
+    els.cycleSummaryDialogBody.innerHTML = '<div class="empty">Sin gastos registrados en este ciclo.</div>';
+    els.cycleSummaryDialog.showModal();
+    return;
+  }
+
+  const chart = buildCategoryPie(categories, total);
+  els.cycleSummaryDialogBody.innerHTML = `
+    <div class="cycle-summary-layout">
+      <div class="cycle-pie" style="background: ${escapeHtml(chart.gradient)};">
+        <span>${escapeHtml(money(total))}</span>
+      </div>
+      <div class="cycle-summary-list">
+        ${categories.map((item) => {
+          const category = categoryConfig(item.label);
+          const percent = total ? Math.round((Number(item.amount || 0) / total) * 100) : 0;
+          return `
+            <div class="cycle-summary-row">
+              <span class="category-dot" style="--category-color: ${escapeHtml(category.color)}"></span>
+              <strong>${escapeHtml(category.name)}</strong>
+              <small>${escapeHtml(String(percent))}%</small>
+              <span>${escapeHtml(money(item.amount))}</span>
+            </div>
+          `;
+        }).join("")}
+      </div>
+    </div>
+  `;
+  els.cycleSummaryDialog.showModal();
+}
+
+function closeCycleSummary() {
+  els.cycleSummaryDialog.close();
+}
+
+function buildCategoryPie(categories, total) {
+  let cursor = 0;
+  const segments = categories.map((item) => {
+    const category = categoryConfig(item.label);
+    const amount = Number(item.amount || 0);
+    const start = cursor;
+    const end = total ? cursor + (amount / total) * 360 : cursor;
+    cursor = end;
+    return `${category.color} ${start.toFixed(2)}deg ${end.toFixed(2)}deg`;
+  });
+  return { gradient: `conic-gradient(${segments.join(", ")})` };
 }
 
 function renderPaymentsHistoryTable(items) {
