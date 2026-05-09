@@ -181,7 +181,7 @@ async function handleApi(req, res, url) {
   if (req.method === "POST" && listItemPost) {
     const body = await readJson(req);
     const list = normalizeLists(state).find((candidate) => candidate.id === listItemPost[1]);
-    const enrichedBody = await safelyEnrichMediaInput(body, list?.category);
+    const enrichedBody = await requireTmdbForMediaInput(body, list?.category);
     const item = addListItem(state, listItemPost[1], enrichedBody);
     await persist();
     sendJson(res, 201, { item });
@@ -642,10 +642,23 @@ async function enrichNaturalMessageMediaResult(result) {
   const list = result?.data?.list;
   const items = result?.data?.items || [];
   if (!list || !items.length) return;
+  const skipped = [];
+  const visibleItems = [];
   for (const item of items) {
     const enriched = await safelyEnrichMediaInput(item, list.category);
+    if (isMediaCategory(list.category) && !enriched.tmdbId) {
+      removeListItem(state, list.id, item.id);
+      skipped.push(item.title);
+      continue;
+    }
     updateListItem(state, list.id, item.id, enriched);
     Object.assign(item, enriched);
+    visibleItems.push(item);
+  }
+  result.data.items = visibleItems;
+  if (skipped.length) {
+    const message = `No agregue ${skipped.join(", ")} porque no lo encontre en TMDb.`;
+    result.reply = visibleItems.length ? `${result.reply}\n${message}` : message;
   }
 }
 
@@ -656,6 +669,18 @@ async function safelyEnrichMediaInput(input, category) {
     console.warn(`No pude enriquecer con TMDb: ${error.message}`);
     return input;
   }
+}
+
+async function requireTmdbForMediaInput(input, category) {
+  const enriched = await safelyEnrichMediaInput(input, category);
+  if (isMediaCategory(category) && !enriched.tmdbId) {
+    throw new Error(`No encontre "${input.title || "ese titulo"}" en TMDb. Ajusta el nombre antes de agregarlo.`);
+  }
+  return enriched;
+}
+
+function isMediaCategory(category) {
+  return ["peliculas", "series", "anime"].includes(String(category || "").toLowerCase());
 }
 
 async function readJson(req) {
