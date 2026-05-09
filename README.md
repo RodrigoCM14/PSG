@@ -4,14 +4,14 @@ MVP local para organizar gastos, listas y ciclos de la casa desde un hub propio.
 
 ## Ejecutar
 
-Para usar Zonina con OpenAI en local, crea un archivo `.env` a partir de `.env.example` y completa:
+Para usar TMDb en local, puedes configurar tus credenciales como variables de entorno o en `.env`:
 
 ```powershell
-OPENAI_API_KEY=tu_api_key
-OPENAI_MODEL=gpt-5.4-mini
+TMDB_READ_TOKEN=tu_token
+TMDB_API_KEY=tu_api_key
 ```
 
-El archivo `.env` está ignorado por git.
+El archivo `.env` está ignorado por git. También puedes usar `data/tmdb.local.json`, que ya está ignorado.
 
 ```powershell
 node server.js
@@ -26,8 +26,7 @@ Luego abrir `http://localhost:3000`.
 3. Agrega las variables privadas en Render:
    - `TMDB_READ_TOKEN`
    - `TMDB_API_KEY`
-   - `OPENAI_API_KEY`
-   - `OPENAI_MODEL` opcional, por defecto `gpt-5.4-mini`
+   - `AUTH_SECRET`
    - luego, cuando Meta las entregue: `WHATSAPP_VERIFY_TOKEN`, `WHATSAPP_ACCESS_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`
 4. Mantén el disco persistente montado en `/opt/render/project/src/data`, porque el hub guarda datos en `data/hub.json`.
 5. El comando de inicio es `npm start`.
@@ -56,7 +55,16 @@ Si Render intenta desplegarlo como Docker, el repo incluye un `Dockerfile`. En e
 - `POST /api/whatsapp/simulate`
 - `POST /api/discord/preview`
 
-`/api/zonina/chat` usa OpenAI como capa conversacional si `OPENAI_API_KEY` existe. Si no está configurada, procesa el mensaje con el parser local del hub para que el chat siga funcionando.
+`/api/zonina/chat` procesa mensajes con el parser local del hub. TMDb solo se usa para enriquecer películas, series y anime.
+
+## Acceso familiar
+
+El hub identifica usuarios por PIN:
+
+- Rodrigo: `2312`
+- Jess: `0310`
+
+En Render configura `AUTH_SECRET` con un valor largo y privado para firmar sesiones.
 
 El endpoint de WhatsApp simulado acepta:
 

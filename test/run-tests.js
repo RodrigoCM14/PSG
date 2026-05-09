@@ -16,7 +16,7 @@ import {
 } from "../src/domain.js";
 import { handleNaturalMessage } from "../src/parser.js";
 import { mergeMediaMetadata } from "../src/tmdb.js";
-import { handleZoninaAgentMessage } from "../src/zonina-agent.js";
+import { authenticateRequest, loginWithPin } from "../src/auth.js";
 
 const tests = [
   {
@@ -475,24 +475,22 @@ const tests = [
     }
   },
   {
-    name: "zonina chat falls back to local parser without OpenAI key",
-    async run() {
-      const originalKey = process.env.OPENAI_API_KEY;
-      delete process.env.OPENAI_API_KEY;
-      try {
-        const state = createInitialState();
-        createList(state, { name: "Compras", category: "compras" });
-        const result = await handleZoninaAgentMessage(state, {
-          from: "Rodrigo",
-          text: "agrega leche y pan a lista Compras"
-        });
-        assert.equal(result.mode, "parser");
-        assert.equal(result.intent, "list");
-        assert.equal(state.lists[0].name, "Compras");
-        assert.deepEqual(state.lists[0].items.map((item) => item.title), ["Leche", "Pan"]);
-      } finally {
-        if (originalKey) process.env.OPENAI_API_KEY = originalKey;
-      }
+    name: "pin login identifies Rodrigo and Jess",
+    run() {
+      const rodrigo = loginWithPin("2312");
+      const jess = loginWithPin("0310");
+      assert.equal(rodrigo.user.name, "Rodrigo");
+      assert.equal(jess.user.name, "Jess");
+      assert.equal(loginWithPin("0000"), null);
+    }
+  },
+  {
+    name: "session token authenticates requests",
+    run() {
+      const session = loginWithPin("0310");
+      const req = { headers: { authorization: `Bearer ${session.token}` } };
+      assert.deepEqual(authenticateRequest(req), { id: "jess", name: "Jess" });
+      assert.equal(authenticateRequest({ headers: {} }), null);
     }
   }
 ];

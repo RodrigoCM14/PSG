@@ -30,8 +30,8 @@ import {
 import { handleNaturalMessage } from "./src/parser.js";
 import { loadState, saveState } from "./src/store.js";
 import { enrichMediaInput, loadTmdbConfig } from "./src/tmdb.js";
-import { handleZoninaAgentMessage } from "./src/zonina-agent.js";
 import { loadLocalEnv } from "./src/env.js";
+import { authenticateRequest, loginWithPin } from "./src/auth.js";
 
 const ROOT = resolve(".");
 await loadLocalEnv(ROOT);
@@ -67,8 +67,35 @@ async function handleApi(req, res, url) {
     sendJson(res, 200, {
       name: "Pukis Hub",
       version: "0.1.0",
-      modules: ["expenses", "billing-cycles", "lists", "categories", "exports", "zonina-agent", "whatsapp-ready", "discord-preview"]
+      modules: ["expenses", "billing-cycles", "lists", "categories", "exports", "zonina-local", "whatsapp-ready", "discord-preview"]
     });
+    return;
+  }
+
+  if (req.method === "POST" && url.pathname === "/api/auth/login") {
+    const body = await readJson(req);
+    const session = loginWithPin(body.pin);
+    if (!session) {
+      sendJson(res, 401, { error: "PIN incorrecto" });
+      return;
+    }
+    sendJson(res, 200, session);
+    return;
+  }
+
+  if (req.method === "GET" && url.pathname === "/api/auth/me") {
+    const user = authenticateRequest(req);
+    if (!user) {
+      sendJson(res, 401, { error: "Sesion no valida" });
+      return;
+    }
+    sendJson(res, 200, { user });
+    return;
+  }
+
+  const authUser = authenticateRequest(req);
+  if (!authUser) {
+    sendJson(res, 401, { error: "Inicia sesion con tu PIN para continuar." });
     return;
   }
 
@@ -283,12 +310,7 @@ async function handleApi(req, res, url) {
 
   if (req.method === "POST" && url.pathname === "/api/whatsapp/simulate") {
     const body = await readJson(req);
-    const result = handleNaturalMessage(state, body);
-    await enrichNaturalMessageMediaResult(result);
-    if (result.intent === "balance") {
-      result.data.balances = calculateBalances(state);
-      result.reply = formatBalances(result.data.balances);
-    }
+    const result = await processNaturalMessage({ ...body, from: authUser.name });
     await persist();
     sendJson(res, 200, { ...result, state: buildViewState() });
     return;
@@ -296,7 +318,7 @@ async function handleApi(req, res, url) {
 
   if (req.method === "POST" && url.pathname === "/api/zonina/chat") {
     const body = await readJson(req);
-    const result = await handleZoninaAgentMessage(state, body, { enrichNaturalMessageMediaResult });
+    const result = await processNaturalMessage({ ...body, from: authUser.name });
     await persist();
     sendJson(res, 200, body.includeState ? { ...result, state: buildViewState() } : result);
     return;
@@ -604,6 +626,16 @@ function formatBalances(balances) {
 
 async function persist() {
   await saveState(DATA_FILE, state);
+}
+
+async function processNaturalMessage(body) {
+  const result = handleNaturalMessage(state, body);
+  await enrichNaturalMessageMediaResult(result);
+  if (result.intent === "balance") {
+    result.data.balances = calculateBalances(state);
+    result.reply = formatBalances(result.data.balances);
+  }
+  return result;
 }
 
 async function enrichNaturalMessageMediaResult(result) {

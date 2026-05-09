@@ -1,4 +1,6 @@
-﻿const els = {
+﻿import { api, ensureSession, renderSessionBadge } from "./session.js";
+
+const els = {
   refreshButton: document.querySelector("#refreshButton"),
   botReply: document.querySelector("#botReply"),
   cycleDashboard: document.querySelector("#cycleDashboard"),
@@ -54,6 +56,9 @@ let latestMonthlyClose = null;
 let expensePage = 1;
 let expenseSort = { key: "date", direction: "desc" };
 const EXPENSES_PER_PAGE = 30;
+
+await ensureSession();
+renderSessionBadge(document.querySelector(".topnav"));
 
 els.refreshButton.addEventListener("click", refresh);
 for (const filter of [els.expenseMonthFilter, els.expensePersonFilter, els.expenseCategoryFilter, els.expenseSearchFilter]) {
@@ -141,17 +146,6 @@ els.expenseEditForm.addEventListener("submit", async (event) => {
 
 async function refresh() {
   render(await api("/api/state"));
-}
-
-async function api(path, options = {}) {
-  const response = await fetch(path, {
-    method: options.method || "GET",
-    headers: options.body ? { "Content-Type": "application/json" } : undefined,
-    body: options.body ? JSON.stringify(options.body) : undefined
-  });
-  const payload = await response.json();
-  if (!response.ok) throw new Error(payload.error || "Error de API");
-  return payload;
 }
 
 function render(state) {
