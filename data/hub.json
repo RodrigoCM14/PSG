@@ -2,7 +2,7 @@
   "meta": {
     "version": 1,
     "createdAt": "2026-05-07T21:10:00.000Z",
-    "updatedAt": "2026-05-08T23:48:58.224Z"
+    "updatedAt": "2026-05-09T02:20:20.907Z"
   },
   "people": [
     {
@@ -152,9 +152,66 @@
       "dueDate": "",
       "status": "open",
       "notes": "Lista permanente para peliculas por ver y calificadas.",
-      "items": [],
+      "items": [
+        {
+          "id": "li_moxprgi4_cb64yi",
+          "title": "Michael",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": 936075,
+          "tmdbType": "movie",
+          "originalTitle": "Michael",
+          "year": "2026",
+          "director": "Antoine Fuqua",
+          "creator": "",
+          "productionCompanies": [
+            "Lionsgate",
+            "GK Films",
+            "Optimum Productions"
+          ],
+          "overview": "El viaje de Michael Jackson más allá de la música, desde el descubrimiento de su extraordinario talento como líder de los Jackson Five hasta convertirse en una visionaria estrella cuya ambición creativa despertó un incansable afán por consagrarse como el mayor icono de la industria del entretenimiento.",
+          "posterPath": "https://image.tmdb.org/t/p/w342/2uK36ujoDXOfNiJ5Yp3raVprB51.jpg",
+          "tmdbUrl": "https://www.themoviedb.org/movie/936075",
+          "order": 0,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-09T02:17:21.478Z",
+          "updatedAt": "2026-05-09T02:17:54.273Z"
+        },
+        {
+          "id": "li_moxps37b_ruqew5",
+          "title": "¡Olvídate de mí!",
+          "priority": "normal",
+          "rating": null,
+          "platform": "",
+          "recommendedBy": "",
+          "mediaStatus": "pendiente",
+          "tmdbId": 38,
+          "tmdbType": "movie",
+          "originalTitle": "Eternal Sunshine of the Spotless Mind",
+          "year": "2004",
+          "director": "Michel Gondry",
+          "creator": "",
+          "productionCompanies": [
+            "Focus Features",
+            "Anonymous Content",
+            "This is that"
+          ],
+          "overview": "Una mujer usa los servicios de una empresa para borrar de su memoria todo recuerdo de su ex pareja. Ofendido, el hombre intenta hacer lo mismo que ella, pero el proceso no sucede según lo esperado y el protagonista debe atravesar la gigantesca marea de recuerdos de su propio cerebro para recomponer las cosas.",
+          "posterPath": "https://image.tmdb.org/t/p/w342/2bHEXzzccUsBNOS6rn9uvi3vAGW.jpg",
+          "tmdbUrl": "https://www.themoviedb.org/movie/38",
+          "order": 1,
+          "done": false,
+          "deletedAt": null,
+          "createdAt": "2026-05-09T02:17:50.903Z",
+          "updatedAt": "2026-05-09T02:17:54.273Z"
+        }
+      ],
       "createdAt": "2026-05-08T13:03:25.694Z",
-      "updatedAt": "2026-05-08T23:48:58.224Z",
+      "updatedAt": "2026-05-09T02:17:54.273Z",
       "deletedAt": null
     },
     {

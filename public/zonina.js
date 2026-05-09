@@ -35,7 +35,7 @@ els.form.addEventListener("submit", async (event) => {
   try {
     const body = { text };
     const result = await apiWithTimeout("/api/zonina/chat", { method: "POST", body });
-    pending.querySelector(".chat-bubble").textContent = result.reply || "Listo.";
+    setBubbleContent(pending.querySelector(".chat-bubble"), result.reply || "Listo.");
   } catch (error) {
     pending.querySelector(".chat-bubble").textContent = `No pude procesarlo: ${error.message}`;
   }
@@ -52,6 +52,28 @@ function addMessage(kind, text) {
   els.messages.append(row);
   els.messages.scrollTop = els.messages.scrollHeight;
   return row;
+}
+
+function setBubbleContent(bubble, text) {
+  bubble.replaceChildren(...renderMessage(text));
+}
+
+function renderMessage(text) {
+  const nodes = [];
+  const pattern = /\[([^\]]+)\]\((https:\/\/www\.themoviedb\.org\/[^)\s]+)\)/g;
+  let lastIndex = 0;
+  for (const match of String(text || "").matchAll(pattern)) {
+    if (match.index > lastIndex) nodes.push(document.createTextNode(text.slice(lastIndex, match.index)));
+    const link = document.createElement("a");
+    link.href = match[2];
+    link.textContent = match[1];
+    link.target = "_blank";
+    link.rel = "noopener noreferrer";
+    nodes.push(link);
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < String(text || "").length) nodes.push(document.createTextNode(String(text || "").slice(lastIndex)));
+  return nodes.length ? nodes : [document.createTextNode("")];
 }
 
 async function apiWithTimeout(path, options = {}) {

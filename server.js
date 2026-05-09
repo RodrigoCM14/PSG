@@ -656,6 +656,9 @@ async function enrichNaturalMessageMediaResult(result) {
     visibleItems.push(item);
   }
   result.data.items = visibleItems;
+  if (isMediaCategory(list.category) && visibleItems.length) {
+    result.reply = `Listo. Agregue a ${list.name}: ${visibleItems.map(formatMediaChatItem).join(", ")}.`;
+  }
   if (skipped.length) {
     const message = `No agregue ${skipped.join(", ")} porque no lo encontre en TMDb.`;
     result.reply = visibleItems.length ? `${result.reply}\n${message}` : message;
@@ -681,6 +684,20 @@ async function requireTmdbForMediaInput(input, category) {
 
 function isMediaCategory(category) {
   return ["peliculas", "series", "anime"].includes(String(category || "").toLowerCase());
+}
+
+function formatMediaChatItem(item) {
+  const title = item.originalTitle || item.title;
+  const label = item.tmdbUrl ? `[${title}](${item.tmdbUrl})` : title;
+  const extras = [];
+  if (item.rating) extras.push(`${item.rating}/5`);
+  if (item.platform) extras.push(item.platform);
+  if (item.year) extras.push(item.year);
+  if (item.director) extras.push(item.director);
+  if (item.creator) extras.push(item.creator);
+  if (!item.director && !item.creator && item.productionCompanies?.length) extras.push(item.productionCompanies[0]);
+  if (item.mediaStatus && item.mediaStatus !== "pendiente") extras.push(item.mediaStatus);
+  return extras.length ? `${label} (${extras.join(", ")})` : label;
 }
 
 async function readJson(req) {

@@ -446,8 +446,7 @@ const tests = [
         tmdbUrl: "https://www.themoviedb.org/movie/438631"
       });
       const result = handleNaturalMessage(state, { from: "Jess", text: "lista Peliculas" });
-      assert.match(result.reply, /Dune \(4.5\/5, Max, 2021, Denis Villeneuve\)/);
-      assert.match(result.reply, /themoviedb/);
+      assert.match(result.reply, /\[Dune\]\(https:\/\/www\.themoviedb\.org\/movie\/438631\) \(4.5\/5, Max, 2021, Denis Villeneuve\)/);
     }
   },
   {

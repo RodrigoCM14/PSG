@@ -469,6 +469,8 @@ function parseMediaItem(value) {
 }
 
 function formatListItemForReply(item) {
+  const title = item.originalTitle || item.title;
+  const label = item.tmdbUrl ? `[${title}](${item.tmdbUrl})` : title;
   const extras = [];
   if (item.rating) extras.push(`${item.rating}/5`);
   if (item.platform) extras.push(item.platform);
@@ -477,8 +479,7 @@ function formatListItemForReply(item) {
   if (item.creator) extras.push(item.creator);
   if (!item.director && !item.creator && item.productionCompanies?.length) extras.push(item.productionCompanies[0]);
   if (item.mediaStatus && item.mediaStatus !== "pendiente") extras.push(item.mediaStatus);
-  const suffix = item.tmdbUrl ? ` - ${item.tmdbUrl}` : "";
-  return extras.length ? `${item.title} (${extras.join(", ")})${suffix}` : `${item.title}${suffix}`;
+  return extras.length ? `${label} (${extras.join(", ")})` : label;
 }
 
 function escapeRegExp(value) {
